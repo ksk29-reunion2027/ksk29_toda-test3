@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>同窓会ホームページ</title>
+    <title>岸和田高校 29期 同窓会ホームページ</title>
 
     <style>
         body {
@@ -13,23 +13,76 @@
             background-color: #f5f5f5;
         }
 
-        h1 {
-            color: #333;
+        .login-box {
+            background: white;
+            width: 300px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        p {
-            color: #666;
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #message {
+            margin-top: 15px;
+            color: red;
+            font-weight: bold;
+        }
+
+        #success {
+            color: green;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
 
-    <h1>岸和田高校 29期同窓会</h1>
+    <div class="login-box">
 
-    <p>
-        ホームページ公開テスト中です。
-    </p>
+        <h1>岸和田高校 29期同窓会</h1>
+
+        <p>パスワードを入力してください</p>
+        <input type="password" id="password" placeholder="パスワード">
+        <br>
+        <button onclick="checkPassword()">ログイン</button>
+        <div id="message"></div>
+
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("password").value;
+            const message = document.getElementById("message");
+            if (password === "") {
+                message.innerHTML = "パスワードを入力してください";
+                message.style.color = "red";
+            } else if (password === "ksk29") {
+                message.innerHTML = "認証成功";
+                message.style.color = "green";
+            } else {
+                message.innerHTML = "パスワードが違います";
+                message.style.color = "red";
+            }
+        }
+    </script>
 
 </body>
 </html>
