@@ -97,7 +97,7 @@ button:hover{
 <h1>同窓会参加申し込み</h1>
 
 <div class="message">
-同窓会参加において、以下の情報を記入し、送信ボタンを押してください。ｚ０５
+同窓会参加において、以下の情報を記入し、送信ボタンを押してください。ｚ０６
 </div>
 
 <form id="entryForm">
@@ -263,6 +263,25 @@ button:hover{
 
 </form>
 
+// デバッグ文字列   ＊＊＊＊＊＊＊
+<hr>
+
+<h3>デバッグ表示</h3>
+
+<pre id="debugArea"
+style="
+background:#eeeeee;
+padding:10px;
+font-size:14px;
+white-space:pre-wrap;
+"></pre>
+    
+
+
+
+
+
+    
 </div>
 
 <script>
@@ -491,18 +510,27 @@ document
             comment
         );
         // チェック＊＊
-        console.log("classNo=",classNo);
-        console.log("lastName=",lastName);
-        console.log("firstName=",firstName);
-        console.log("mail1=",mail1);
-        console.log("attendanceText=",attendanceText);
-        console.log("comment=",comment);
-        
-        for (let pair of formData.entries()) {
+/ デバッグ文字列
+let debugText = "";
 
-            console.log(pair[0], pair[1]);
+debugText += "classNo = " + classNo + "\n";
+debugText += "lastName = " + lastName + "\n";
+debugText += "firstName = " + firstName + "\n";
+debugText += "mail1 = " + mail1 + "\n";
+debugText += "attendanceText = " + attendanceText + "\n";
+debugText += "comment = " + comment + "\n\n";
 
-        }
+// formData内容表示
+for (let pair of formData.entries()) {
+
+    debugText +=
+        pair[0] + " = " + pair[1] + "\n";
+
+}
+
+// 画面へ表示
+document.getElementById("debugArea")
+    .textContent = debugText;
        
         
         // 送信
