@@ -97,7 +97,7 @@ button:hover{
 <h1>同窓会参加申し込み</h1>
 
 <div class="message">
-同窓会参加において、以下の情報を記入し、送信ボタンを押してください。ｚ０１
+同窓会参加において、以下の情報を記入し、送信ボタンを押してください。ｚ０２
 </div>
 
 <form id="entryForm">
@@ -106,7 +106,7 @@ button:hover{
     <div class="item">
 
         <label for="classNo">
-            3年生時の組番号
+            3年生時の組番号　※必須
         </label>
 
         <select id="classNo">
@@ -490,7 +490,15 @@ document
             "entry.409851001",
             comment
         );
+        // チェック＊＊
+        console.log(classNo);
+        console.log(lastName);
+        console.log(firstName);
+        console.log(mail1);
+        console.log(attendanceText);
+        console.log(comment);
 
+        
         // 送信
         fetch(formUrl, {
 
