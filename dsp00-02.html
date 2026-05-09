@@ -492,15 +492,18 @@ document
         );
         // チェック＊＊
         console.log("classNo=",classNo);
-        console.log("lastName="lastName);
-        console.log("firstName="firstName);
-        console.log("mail1="mail1);
-        console.log("attendanceText="attendanceText);
-        console.log("comment="comment);
+        console.log("lastName=",lastName);
+        console.log("firstName=",firstName);
+        console.log("mail1=",mail1);
+        console.log("attendanceText=",attendanceText);
+        console.log("comment=",comment);
         
         for (let pair of formData.entries()) {
+
             console.log(pair[0], pair[1]);
+
         }
+       
         
         // 送信
         fetch(formUrl, {
