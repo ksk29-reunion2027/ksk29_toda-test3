@@ -8,9 +8,14 @@
     <title>岸和田高校29期 同窓会</title>
 
     <script>
-        let d_flgc= 0;  // 1:デバック　それ以外　：本番
+        // =========================
+        // デバッグフラグ
+        // 1: 認証スキップ
+        // 0: 通常認証
+        // =========================
+        const DEBUG_MODE = 0;
 
-        if(d_flgc!==1) {
+        if(DEBUG_MODE!==1) {
             // 認証済み確認
             if (sessionStorage.getItem("auth") !== "ok") {
                 // 未認証ならログイン画面へ戻す
@@ -149,7 +154,7 @@
             </p>
         </div>
 
-        <a href="gaiyou.html" class="menu-button">
+        <a href="dsp00-01.html" class="menu-button">
             １．2027年同窓会の概要
         </a>
 
