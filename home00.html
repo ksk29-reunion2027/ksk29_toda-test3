@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>岸和田高校29期 同窓会</title>
+
+    <script>
+        let d_flgc= 0;  // 1:デバック　それ以外　：本番
+
+        if(d_flgc!==1) {
+            // 認証済み確認
+            if (sessionStorage.getItem("auth") !== "ok") {
+                // 未認証ならログイン画面へ戻す
+                window.location.href = "index.html";
+             }
+        }
+
+        // ログアウト処理
+        function logout() {
+            sessionStorage.removeItem("auth");
+            window.location.href = "index.html";
+        
+    }
+
+    </script>
+
+    <style>
+
+        body {
+
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            /* 背景画像 */
+            background-image: url('image/back04.png');
+            /* 繰り返し防止 */
+            background-repeat: no-repeat;
+            /* 中央配置 */
+            background-position: center center;
+            /* 画面全体にフィット */
+            background-size: cover;
+            /* 背景固定 */
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .greeting {
+
+            background-color: rgba(255,255,255,0.88);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            line-height: 1.8;
+
+        }
+
+        h1 {
+
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        .menu-button {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            text-decoration: none;
+            background-color: #2d6cdf;
+            color: white;
+            padding: 18px;
+            margin-bottom: 18px;
+            border-radius: 12px;
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+
+        }
+
+        .menu-button:hover {
+            background-color: #1f56b5;
+        }
+
+        .logout-button {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            text-decoration: none;
+            background-color: #888;
+            color: white;
+            padding: 14px;
+            margin-top: 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #666;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>岸和田高校29期 同窓会</h1>
+        <div class="greeting">
+            <p>
+                皆さま、お元気でしょうか。
+            </p>
+            <p>
+                2027年開催予定の同窓会に向け、
+                情報共有用ホームページを開設いたしました。
+            </p>
+            <p>
+                開催概要、参加申込、現在の申込状況などを
+                随時掲載してまいります。
+            </p>
+            <p>
+                ぜひご活用ください。
+            </p>
+        </div>
+
+        <a href="gaiyou.html" class="menu-button">
+            １．2027年同窓会の概要
+        </a>
+
+        <a href="entry.html" class="menu-button">
+            ２．同窓会への参加申し込み
+        </a>
+
+        <a href="status.html" class="menu-button">
+            ３．現在の申込状況の確認
+        </a>
+
+        <button class="logout-button" onclick="logout()">
+            ログアウト
+        </button>
+
+        <div class="footer">
+            Kishiwada High School 29th Reunion
+        </div>
+
+    </div>
+
+</body>
+</html>
