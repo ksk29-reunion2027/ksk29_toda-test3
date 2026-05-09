@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>同窓会参加申し込み</title>
+
+<style>
+
+body{
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f5f5f5;
+}
+
+.container{
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h1{
+    text-align: center;
+    font-size: 26px;
+}
+
+.message{
+    margin-bottom: 25px;
+    line-height: 1.8;
+}
+
+.item{
+    margin-bottom: 22px;
+}
+
+label{
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+select,
+textarea{
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.radio-group{
+    margin-top: 10px;
+}
+
+.radio-group label{
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.error{
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+button{
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    background-color: #3366cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+button:hover{
+    background-color: #224499;
+}
+
+.counter{
+    text-align: right;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>同窓会参加申し込み</h1>
+
+<div class="message">
+同窓会参加において、以下の情報を記入し、送信ボタンを押してください。
+</div>
+
+<form id="entryForm">
+
+    <!-- 組番号 -->
+    <div class="item">
+
+        <label for="classNo">
+            3年生時の組番号
+        </label>
+
+        <select id="classNo">
+
+            <option value="">
+                選択してください
+            </option>
+
+            <option value="1">1組</option>
+            <option value="2">2組</option>
+            <option value="3">3組</option>
+            <option value="4">4組</option>
+            <option value="5">5組</option>
+            <option value="6">6組</option>
+            <option value="7">7組</option>
+            <option value="8">8組</option>
+            <option value="9">9組</option>
+            <option value="10">10組</option>
+
+        </select>
+
+    </div>
+
+    <!-- 現姓 -->
+    <div class="item">
+
+        <label for="lastName">
+            姓（現姓） ※必須
+        </label>
+
+        <input type="text" id="lastName">
+
+        <div class="error" id="lastNameError"></div>
+
+    </div>
+
+    <!-- 名前 -->
+    <div class="item">
+
+        <label for="firstName">
+            名前 ※必須
+        </label>
+
+        <input type="text" id="firstName">
+
+        <div class="error" id="firstNameError"></div>
+
+    </div>
+
+    <!-- 旧姓 -->
+    <div class="item">
+
+        <label for="oldName">
+            姓（旧姓）
+        </label>
+
+        <input type="text" id="oldName">
+
+    </div>
+
+    <!-- メールアドレス -->
+    <div class="item">
+
+        <label for="mail1">
+            メールアドレス ※必須
+        </label>
+
+        <input type="text" id="mail1">
+
+        <div class="error" id="mail1Error"></div>
+
+    </div>
+
+    <!-- メールアドレス確認 -->
+    <div class="item">
+
+        <label for="mail2">
+            メールアドレス（確認用） ※必須
+        </label>
+
+        <input type="text" id="mail2">
+
+        <div class="error" id="mail2Error"></div>
+
+    </div>
+
+    <!-- 出欠 -->
+    <div class="item">
+
+        <label>
+            2027年同窓会の参加について ※必須
+        </label>
+
+        <div class="radio-group">
+
+            <label>
+                <input
+                    type="radio"
+                    name="attendance"
+                    value="both"
+                >
+                1次会＋2次会とも参加
+            </label>
+
+            <label>
+                <input
+                    type="radio"
+                    name="attendance"
+                    value="first"
+                >
+                1次会のみ参加
+            </label>
+
+            <label>
+                <input
+                    type="radio"
+                    name="attendance"
+                    value="absent"
+                >
+                今回は欠席
+            </label>
+
+        </div>
+
+        <div class="error" id="attendanceError"></div>
+
+    </div>
+
+    <!-- コメント -->
+    <div class="item">
+
+        <label for="comment">
+            近況・メッセージ（300文字以内）
+        </label>
+
+        <textarea
+            id="comment"
+            rows="6"
+            maxlength="300"
+        ></textarea>
+
+        <div class="counter">
+            <span id="commentCount">0</span>/300
+        </div>
+
+        <div class="error" id="commentError"></div>
+
+    </div>
+
+    <!-- 送信 -->
+    <button type="submit">
+        送信
+    </button>
+
+</form>
+
+</div>
+
+<script>
+
+// コメント文字数表示
+document
+.getElementById("comment")
+.addEventListener("input", function(){
+
+    const len = this.value.length;
+
+    document.getElementById("commentCount")
+        .textContent = len;
+
+});
+
+
+// submit
+document
+.getElementById("entryForm")
+.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    let errorFlag = false;
+
+    // エラー初期化
+    document.getElementById("lastNameError").textContent = "";
+    document.getElementById("firstNameError").textContent = "";
+    document.getElementById("mail1Error").textContent = "";
+    document.getElementById("mail2Error").textContent = "";
+    document.getElementById("attendanceError").textContent = "";
+    document.getElementById("commentError").textContent = "";
+
+    // 値取得
+    const classNo =
+        document.getElementById("classNo").value;
+
+    const lastName =
+        document.getElementById("lastName")
+        .value.trim();
+
+    const firstName =
+        document.getElementById("firstName")
+        .value.trim();
+
+    const oldName =
+        document.getElementById("oldName")
+        .value.trim();
+
+    const mail1 =
+        document.getElementById("mail1")
+        .value.trim();
+
+    const mail2 =
+        document.getElementById("mail2")
+        .value.trim();
+
+    const comment =
+        document.getElementById("comment")
+        .value.trim();
+
+    const attendance =
+        document.querySelector(
+            'input[name="attendance"]:checked'
+        );
+
+    // メール形式
+    const mailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // 現姓チェック
+    if(lastName === ""){
+
+        document.getElementById("lastNameError")
+            .textContent =
+            "姓（現姓）を入力してください";
+
+        errorFlag = true;
+    }
+
+    // 名前チェック
+    if(firstName === ""){
+
+        document.getElementById("firstNameError")
+            .textContent =
+            "名前を入力してください";
+
+        errorFlag = true;
+    }
+
+    // メール1
+    if(mail1 === ""){
+
+        document.getElementById("mail1Error")
+            .textContent =
+            "メールアドレスを入力してください";
+
+        errorFlag = true;
+    }
+    else if(!mailPattern.test(mail1)){
+
+        document.getElementById("mail1Error")
+            .textContent =
+            "メールアドレス形式が正しくありません";
+
+        errorFlag = true;
+    }
+
+    // メール2
+    if(mail2 === ""){
+
+        document.getElementById("mail2Error")
+            .textContent =
+            "確認用メールアドレスを入力してください";
+
+        errorFlag = true;
+    }
+    else if(mail1 !== mail2){
+
+        document.getElementById("mail2Error")
+            .textContent =
+            "メールアドレスが一致しません";
+
+        errorFlag = true;
+    }
+
+    // 出欠
+    if(!attendance){
+
+        document.getElementById("attendanceError")
+            .textContent =
+            "参加区分を選択してください";
+
+        errorFlag = true;
+    }
+
+    // コメント長さ
+    if(comment.length > 300){
+
+        document.getElementById("commentError")
+            .textContent =
+            "コメントは300文字以内で入力してください";
+
+        errorFlag = true;
+    }
+
+    // エラーあり
+    if(errorFlag){
+        return;
+    }
+
+    // 出欠文字
+    let attendanceText = "";
+
+    if(attendance.value === "both"){
+        attendanceText =
+            "1次会＋2次会とも参加";
+    }
+    else if(attendance.value === "first"){
+        attendanceText =
+            "1次会のみ参加";
+    }
+    else{
+        attendanceText =
+            "今回は欠席";
+    }
+
+    // 確認画面
+    let confirmMessage =
+
+        "以下の内容で送信します。\n\n" +
+
+        "組番号：" + classNo + "組\n" +
+        "姓（現姓）：" + lastName + "\n" +
+        "名前：" + firstName + "\n" +
+        "姓（旧姓）：" + oldName + "\n" +
+        "メール：" + mail1 + "\n" +
+        "出欠：" + attendanceText + "\n" +
+        "近況：" + comment + "\n";
+
+    // 確認　＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+    if(confirm(confirmMessage)){
+
+        // Googleフォーム送信URL
+        const formUrl =
+        "https://docs.google.com/forms/d/e/1FAIpQLSdb2qmImPfQvHcyf2HPyTXrCPc49ajKNdOSKhgkYL38XoZpig/formResponse";
+
+        // データ生成
+        const formData = new FormData();
+
+        // ↓ entry番号は変更してください ↓
+
+        formData.append(
+            "entry.1258258218",
+            classNo
+        );
+
+        formData.append(
+            "entry.2133458152",
+            lastName
+        );
+
+        formData.append(
+            "entry.142806536",
+            firstName
+        );
+
+        formData.append(
+            "entry.959113090",
+            oldName
+        );
+
+        formData.append(
+            "entry.889352498",
+            mail1
+        );
+
+        formData.append(
+            "entry.1549186020",
+            attendanceText
+        );
+
+        formData.append(
+            "entry.409851001",
+            comment
+        );
+
+        // 送信
+        fetch(formUrl, {
+
+            method: "POST",
+            mode: "no-cors",
+            body: formData
+
+        })
+        .then(() => {
+
+            alert(
+                "送信が完了しました。"
+            );
+
+            document
+                .getElementById("entryForm")
+                .reset();
+
+            document
+                .getElementById("commentCount")
+                .textContent = "0";
+
+        })
+        .catch(() => {
+
+            alert(
+                "送信時にエラーが発生しました。"
+            );
+
+        });
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
