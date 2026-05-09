@@ -86,8 +86,11 @@
                 message.innerHTML = "パスワードを入力してください";
                 message.style.color = "red";
             } else if (password === "ksk29") {
-                message.innerHTML = "認証成功";
-                message.style.color = "green";
+           // 次画面へ移動
+                sessionStorage.setItem("auth", "ok");
+                window.location.href = "home00.html";
+            /*   message.innerHTML = "認証成功"； */
+            /*    message.style.color = "green"; */
             } else {
                 message.innerHTML = "パスワードが違います";
                 message.style.color = "red";
