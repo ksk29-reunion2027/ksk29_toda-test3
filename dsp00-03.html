@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+現在の申込状況
+</title>
+
+<style>
+
+body{
+
+    font-family: sans-serif;
+    margin: 0;
+    padding: 15px;
+    background-color: #f5f5f5;
+
+}
+
+.container{
+
+    max-width: 900px;
+    margin: auto;
+
+}
+
+h1{
+
+    text-align: center;
+    margin-bottom: 25px;
+
+}
+
+.section{
+
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+
+}
+
+label{
+
+    font-weight: bold;
+
+}
+
+select{
+
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+
+}
+
+iframe{
+
+    width: 100%;
+    border: none;
+    background: white;
+
+}
+
+#overallFrame{
+
+    height: 350px;
+
+}
+
+#classFrame{
+
+    height: 600px;
+
+}
+
+.note{
+
+    font-size: 14px;
+    color: #666666;
+    margin-top: 10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+        現在の申込状況
+    </h1>
+
+    <!-- 全体集計 -->
+
+    <div class="section">
+
+        <h2>
+            全体集計
+        </h2>
+
+        <iframe
+            id="overallFrame"
+            src=""
+        ></iframe>
+
+    </div>
+
+    <!-- 組別表示 -->
+
+    <div class="section">
+
+        <h2>
+            組別申込状況
+        </h2>
+
+        <label for="classSelect">
+
+            表示する組を選択してください
+
+        </label>
+
+        <select id="classSelect">
+
+            <option value="01">
+                1組
+            </option>
+
+            <option value="02">
+                2組
+            </option>
+
+            <option value="03">
+                3組
+            </option>
+
+            <option value="04">
+                4組
+            </option>
+
+            <option value="05">
+                5組
+            </option>
+
+            <option value="06">
+                6組
+            </option>
+
+            <option value="07">
+                7組
+            </option>
+
+            <option value="08">
+                8組
+            </option>
+
+            <option value="09">
+                9組
+            </option>
+
+            <option value="10">
+                10組
+            </option>
+
+        </select>
+
+        <iframe
+            id="classFrame"
+            src=""
+        ></iframe>
+
+        <div class="note">
+
+            ※ 内容は自動更新されます
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+// =====================
+// overall URL
+// =====================
+
+const OVERALL_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=2032385808&single=true&headers=false"
+ 
+
+
+// =====================
+// class URL
+// =====================
+
+// class01～class10 を gid で管理
+
+const classUrls = {
+
+    "01":
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=1470290441&single=trueheaders=false",
+
+    "02":
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=1645203927&single=true&headers=false",
+
+    "03":
+    "https://docs.google.com/spreadsheets/d/e/XXXXXXXX/pubhtml?gid=333333333&single=true&widget=true&headers=false",
+
+    "04":
+    "https://docs.google.com/spreadsheets/d/e/XXXXXXXX/pubhtml?gid=444444444&single=true&widget=true&headers=false",
+
+    "05":
+    "https://docs.google.com/spreadsheets/d/e/XXXXXXXX/pubhtml?gid=555555555&single=true&widget=true&headers=false",
+
+    "06":
+    "https://docs.google.com/spreadsheets/d/e/XXXXXXXX/pubhtml?gid=666666666&single=true&widget=true&headers=false",
+
+    "07":
+    "https://docs.google.com/spreadsheets/d/e/XXXXXXXX/pubhtml?gid=777777777&single=true&widget=true&headers=false",
+
+    "08":
+    "https://docs.google.com/spreadsheets/d/e/XXXXXXXX/pubhtml?gid=888888888&single=true&widget=true&headers=false",
+
+    "09":
+    "https://docs.google.com/spreadsheets/d/e/XXXXXXXX/pubhtml?gid=999999999&single=true&widget=true&headers=false",
+
+    "10":
+    "https://docs.google.com/spreadsheets/d/e/XXXXXXXX/pubhtml?gid=101010101&single=true&widget=true&headers=false"
+
+};
+
+// overall表示
+document
+.getElementById("overallFrame")
+.src = OVERALL_URL;
+
+// 組表示切替
+function updateClassFrame(){
+
+    const no =
+        document
+        .getElementById("classSelect")
+        .value;
+
+    document
+    .getElementById("classFrame")
+    .src =
+        classUrls[no];
+
+}
+
+// 初期表示
+updateClassFrame();
+
+// 選択変更
+document
+.getElementById("classSelect")
+.addEventListener(
+    "change",
+    updateClassFrame
+);
+
+</script>
+
+</body>
+
+</html>
