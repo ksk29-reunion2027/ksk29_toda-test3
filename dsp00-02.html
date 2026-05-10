@@ -129,6 +129,33 @@ button:hover{
         </select>
 
     </div>
+<!-- 性別 -->
+<div class="item">
+    <label>
+        性別 ※必須
+    </label>
+    <div class="radio-group">
+        <label>
+            <input
+                type="radio"
+                name="gender"
+                value="男性"
+            >
+            男性
+        </label>
+        <label>
+            <input
+                type="radio"
+                name="gender"
+                value="女性"
+            >
+            女性
+        </label>
+    </div>
+    <div class="error" id="genderError"></div>
+</div>
+
+
 
     <!-- 現姓 -->
     <div class="item">
@@ -275,11 +302,6 @@ padding:10px;
 font-size:14px;
 white-space:pre-wrap;
 "></pre>
-    
-
-
-
-
 
     
 </div>
@@ -309,6 +331,7 @@ document
     let errorFlag = false;
 
     // エラー初期化
+    document.getElementById("genderError").textContent = "";
     document.getElementById("lastNameError").textContent = "";
     document.getElementById("firstNameError").textContent = "";
     document.getElementById("mail1Error").textContent = "";
@@ -319,6 +342,11 @@ document
     // 値取得
     const classNo =
         document.getElementById("classNo").value;
+
+    const gender =
+        document.querySelector(
+            'input[name="gender"]:checked'
+        );
 
     const lastName =
         document.getElementById("lastName")
@@ -409,6 +437,14 @@ document
         errorFlag = true;
     }
 
+    // 性別チェック
+    if(!gender){
+        document.getElementById("genderError")
+            .textContent =
+            "性別を選択してください";
+        errorFlag = true;
+    }
+
     // 出欠
     if(!attendance){
 
@@ -456,6 +492,7 @@ document
         "以下の内容で送信します。\n\n" +
 
         "組番号：" + classNo + "組\n" +
+        "性別：" + gender.value + "\n" +  
         "姓（現姓）：" + lastName + "\n" +
         "名前：" + firstName + "\n" +
         "姓（旧姓）：" + oldName + "\n" +
@@ -468,7 +505,7 @@ document
 
         // Googleフォーム送信URL
         const formUrl =
-        "https://docs.google.com/forms/d/e/1FAIpQLSclFAGbU5gy3342-HN_trcVtqXFnVXCqYH91x5yZe02UMiYJg/formResponse";
+        "https://docs.google.com/forms/d/e/1FAIpQLSeFGVfjU2HLRkB7wHT2ZrDZvOrXrh57MqZQQ5A7JOpiHnaVlQ/formResponse";
 
         // データ生成
         const formData = new FormData();
@@ -477,7 +514,12 @@ document
 
         formData.append(
             "entry.1258258218",
-            classNo　+"組"
+            classNo+"組"
+        );
+
+        formData.append(
+            "entry.1766437675",
+            gender.value
         );
 
         formData.append(
@@ -514,6 +556,7 @@ document
 let debugText = "";
 
 debugText += "classNo = " + classNo + "\n";
+debugText += "gender = " + gender.value + "\n";
 debugText += "lastName = " + lastName + "\n";
 debugText += "firstName = " + firstName + "\n";
 debugText += "mail1 = " + mail1 + "\n";
@@ -530,8 +573,7 @@ for (let pair of formData.entries()) {
 
 // 画面へ表示
 document.getElementById("debugArea")
-    .textContent = debugText;
-       
+    .textContent = debugText
         
         // 送信
         fetch(formUrl, {
