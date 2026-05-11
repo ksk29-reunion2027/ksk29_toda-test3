@@ -69,6 +69,33 @@
             line-height: 1.8;
 
         }
+        /*  背景画像　追加 */
+        .greeting::before{
+            content: "";
+            position: absolute;
+        
+            top: 50%;
+            left: 50%;
+        
+            width: 180px;
+            height: 180px;
+        
+            transform:
+                translate(-50%, -50%);
+        
+            background-image:
+                url("img/ksk.png");
+        
+            background-size: contain;
+        
+            background-repeat: no-repeat;
+        
+            opacity: 0.08;
+        
+            z-index: 0;
+        }
+
+        
 
         h1 {
 
