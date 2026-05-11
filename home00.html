@@ -60,42 +60,49 @@
         }
 
         .greeting {
-
+/* -------
             background-color: rgba(255,255,255,0.88);
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 25px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             line-height: 1.8;
-
+---------*/
+            position: relative;
+            background-color: rgba(255,255,255,0.88);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            line-height: 1.8;
+            overflow: hidden;
         }
         /*  背景画像　追加 */
-        .greeting::before{
+        .greeting::before {
+        
             content: "";
             position: absolute;
         
             top: 50%;
             left: 50%;
         
-            width: 180px;
-            height: 180px;
+            width: 220px;
+            height: 220px;
         
-            transform:
-                translate(-50%, -50%);
-        
-            background-image:
-                url("image/ksk.png");
-        
-            background-size: contain;
-        
+            transform: translate(-50%, -50%);
+            background-image: url('image/ksk.png');
             background-repeat: no-repeat;
-        
+            background-position: center;
+            background-size: contain;
             opacity: 0.08;
-        
             z-index: 0;
         }
 
-        
+/* 文字を前面へ */
+        .greeting * {
+            position: relative;
+            z-index: 1;
+        }
 
         h1 {
 
