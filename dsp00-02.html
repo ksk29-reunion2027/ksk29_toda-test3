@@ -573,29 +573,28 @@ document
             "entry.409851001",
             comment
         );
- // チェック＊＊
+// チェック＊＊
 // デバッグ文字列
-let debugText = "";
+//let debugText = "";
 
-debugText += "classNo = " + classNo + "\n";
-debugText += "gender = " + gender.value + "\n";
-debugText += "lastName = " + lastName + "\n";
-debugText += "firstName = " + firstName + "\n";
-debugText += "mail1 = " + mail1 + "\n";
-debugText += "attendanceText = " + attendanceText + "\n";
-debugText += "comment = " + comment + "\n\n";
+//debugText += "classNo = " + classNo + "\n";
+//debugText += "gender = " + gender.value + "\n";
+//debugText += "lastName = " + lastName + "\n";
+//debugText += "firstName = " + firstName + "\n";
+//debugText += "mail1 = " + mail1 + "\n";
+//debugText += "attendanceText = " + attendanceText + "\n";
+//debugText += "comment = " + comment + "\n\n";
 
 // formData内容表示
-for (let pair of formData.entries()) {
-
-    debugText +=
-        pair[0] + " = " + pair[1] + "\n";
-
-}
+//for (let pair of formData.entries()) {
+//
+//   debugText +=
+//        pair[0] + " = " + pair[1] + "\n";
+//}
 
 // 画面へ表示
-document.getElementById("debugArea")
-    .textContent = debugText
+//document.getElementById("debugArea")
+//   .textContent = debugText
         
         // 送信
         fetch(formUrl, {
