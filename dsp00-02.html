@@ -7,6 +7,25 @@
 
 <title>同窓会参加申し込み</title>
 
+    <script>
+        // =========================
+        // デバッグフラグ
+        // 1: 認証スキップ
+        // 0: 通常認証
+        // =========================
+
+        const DEBUG_MODE = 1;
+        // =========================
+        // 認証チェック
+        // =========================
+        if (!DEBUG_MODE) {
+            if (sessionStorage.getItem("auth") !== "ok") {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+
+    
 <style>
 
 body{
