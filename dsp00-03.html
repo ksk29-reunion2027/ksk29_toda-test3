@@ -110,9 +110,37 @@ font-size: 14px;
     margin-top: 10px;
 
 }
+/* 追加0510
+戻るボタンのスタイル */
+.back-button-wrapper{
 
+    text-align: center;
+    margin-bottom: 30px;
+
+}
+
+/* 追加0510 */
+.back-button{
+
+    display: inline-block;
+    padding: 12px 40px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #555555;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+/* 追加0510 */
+.back-button:hover{
+    background-color: #333333;
+}
+    
 </style>
-
 </head>
 
 <body>
@@ -197,7 +225,19 @@ font-size: 14px;
         </div>
 
     </div>
+   <!-- 追加0510
+    戻るボタン -->
+    <div class="back-button-wrapper">
 
+        <!-- 追加0510 -->
+        <button
+            class="back-button"
+            onclick="history.back()"
+        >
+            ← 戻る
+        </button>
+
+    </div>
 </div>
 
 <script>
