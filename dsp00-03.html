@@ -220,7 +220,7 @@ font-size: 14px;
 
         <div class="note">
 
-            ※ 内容は自動更新されます
+            ※ 内容は自動更新されます（約3分ごと）
 
         </div>
 
@@ -243,99 +243,78 @@ font-size: 14px;
 <script>
 
 // =====================
-// overall URL
+// overall URL（ベースURL）
 // =====================
-
 const OVERALL_URL =
-// コメント０１
-//    "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=2032385808&single=true&headers=false";
- 
- "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=2010882400&single=true&widget=true&headers=false";
-
- 
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=2010882400&single=true&widget=true&headers=false";
 
 // =====================
 // class URL
 // =====================
-
-// class01～class10 を gid で管理
-
 const classUrls = {
-
-    "01":
-// コメント０２
-//    "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=1470290441&single=true&headers=false",
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=472316288&single=true&widget=true&headers=false",
-    
-    "02":
-    // "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=1645203927&single=true&headers=false",
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=1843648544&single=true&widget=true&headers=false",
-
-    "03":
-    // "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=1006529350&single=true&headers=false",
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=451934194&single=true&widget=true&headers=false",
-
-    "04":
-   //  "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=323409337&single=true&headers=false",
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=326384546&single=true&widget=true&headers=false",
-    
-    "05":
-    //"https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=1042607206&single=true&headers=false",
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=231453092&single=true&widget=true&headers=false",
-
-    "06":
-    // "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=127070503&single=true&headers=false",
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=1276677638&single=true&widget=true&headers=false",
-    
-    "07":
-    // "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=1123447393&single=true&headers=false",
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=2118109435&single=true&widget=true&headers=false",
-
-    "08":
-    // "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=1430847810&single=true&headers=false",
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=2098178067&single=true&widget=true&headers=false",
-    
-    "09":
-    // "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=1445485037&single=true&headers=false",
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=998264796&single=true&widget=true&headers=false",
-    
-    "10":
-    // "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3TfJfawdI6R9kaSVnElzMZ64K7lCSAJOscRwIpH9b-jdxxjVJoRF42M2lwlZwA6nG0Dxw4tenz4aH/pubhtml?gid=1360387594&single=true&headers=false"
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=260113048&single=true&widget=true&headers=false"
-
+    "01": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=472316288&single=true&widget=true&headers=false",
+    "02": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=1843648544&single=true&widget=true&headers=false",
+    "03": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=451934194&single=true&widget=true&headers=false",
+    "04": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=326384546&single=true&widget=true&headers=false",
+    "05": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=231453092&single=true&widget=true&headers=false",
+    "06": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=1276677638&single=true&widget=true&headers=false",
+    "07": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=2118109435&single=true&widget=true&headers=false",
+    "08": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=2098178067&single=true&widget=true&headers=false",
+    "09": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=998264796&single=true&widget=true&headers=false",
+    "10": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2uxlTOPcK5iPFx4V0vLNEv6ShmXZIVWPs2hQG72_Ru68wwF-n7xERHoaQq_y3gS44QD1Vk-hzzbiz/pubhtml?gid=260113048&single=true&widget=true&headers=false"
 };
 
-// overall表示
-document
-.getElementById("overallFrame")
-.src = OVERALL_URL
-   + "&t=" +  Date.now() ;
+// =====================
+// iframe を完全に再生成してキャッシュを回避
+// =====================
+function reloadIframe(iframeId, url) {
+    const oldFrame = document.getElementById(iframeId);
+    const container = oldFrame.parentNode;
+
+    // 古いiframeのスタイル情報を引き継ぐ
+    const frameId = oldFrame.id;
+
+    // 古いiframeを削除
+    oldFrame.remove();
+
+    // 新しいiframeを生成
+    const newFrame = document.createElement("iframe");
+    newFrame.id = frameId;
+    // タイムスタンプ付きURLでブラウザキャッシュをバスト
+    newFrame.src = url + "&t=" + Date.now();
+    container.appendChild(newFrame);
+}
+
+// overall 表示
+function loadOverall() {
+    reloadIframe("overallFrame", OVERALL_URL);
+}
 
 // 組表示切替
-function updateClassFrame(){
-
-    const no =
-        document
-        .getElementById("classSelect")
-        .value;
-
-    document
-    .getElementById("classFrame")
-    .src =
-        classUrls[no] + "&t=" + Date.now();
-
+function updateClassFrame() {
+    const no = document.getElementById("classSelect").value;
+    reloadIframe("classFrame", classUrls[no]);
 }
 
 // 初期表示
+loadOverall();
 updateClassFrame();
 
 // 選択変更
 document
-.getElementById("classSelect")
-.addEventListener(
-    "change",
-    updateClassFrame
-);
+    .getElementById("classSelect")
+    .addEventListener("change", updateClassFrame);
+
+// =====================
+// 自動リロード（3分ごと）
+// ※ Google側キャッシュは5〜30分のため完全即時反映は困難
+// =====================
+const RELOAD_INTERVAL_MS = 3 * 60 * 1000; // 3分
+
+setInterval(function() {
+    loadOverall();
+    updateClassFrame();
+}, RELOAD_INTERVAL_MS);
 
 </script>
 
