@@ -309,7 +309,7 @@ const classUrls = {
 document
 .getElementById("overallFrame")
 .src = OVERALL_URL
-   + "&t=" + new Date().getTime() ;
+   + "&t=" +  Date.now() ;
 
 // 組表示切替
 function updateClassFrame(){
@@ -322,7 +322,7 @@ function updateClassFrame(){
     document
     .getElementById("classFrame")
     .src =
-        classUrls[no] + "&t=" + new Date().getTime();
+        classUrls[no] + "&t=" + Date.now();
 
 }
 
