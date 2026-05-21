@@ -139,7 +139,7 @@
    <div class="login-box">
 
         <h1> ｘｘｘーzz高校　 </h1>
-        <h1>  （ｙｙ期同窓会）</h1>
+        <h1>  （２９期同窓会）</h1>
         
         <p>パスワードを入力してください</p>
         <input type="password" id="password" placeholder="パスワード">
@@ -184,14 +184,12 @@
       // 
        async function checkPassword() {
 
-dbg("checkPassword スタート");         
- 
         const pw = document.getElementById("password").value;
         const message = document.getElementById("message"); 
         const hash = await sha256(pw);
 
- dbg("入力値pw=" + pw  + "/");
- dbg("入力値hash=" + hash);         
+ // dbg("入力値pw=" + pw  + "/");
+ // dbg("入力値hash=" + hash);         
           
          if(  pw == "" ) { 
                 message.innerHTML = "パスワードを入力してください!";
