@@ -11,9 +11,11 @@
         crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap"
+   <!--    
         // href="https://fonts.googleapis.com/css2?family=Kaisei+Decol&display=swap"
         // href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap"
         // href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap"
+   -->
         rel="stylesheet">
         
     <meta charset="UTF-8">
@@ -155,13 +157,14 @@
       // パスワードチェック
       //
       async function checkPassword() {
-        const pw = document.getElementById("pw").value;
+        const pw = document.getElementById("password").value;
+        const message = document.getElementById("message"); 
         const hash = await sha256(pw);
 
          if(  pw == "" ) { 
                 message.innerHTML = "パスワードを入力してください!";
                 message.style.color = "red";
-         else if(hash === PASSWORD_HASH){
+         }else if(hash === PASSWORD_HASH){
           // 認証OK時,次画面へ移動
             sessionStorage.setItem("auth", "ok");
             window.location.href = "home00.html";
