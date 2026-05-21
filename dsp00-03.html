@@ -363,9 +363,10 @@ async function loadClass() {
                 const isLeft = (colIndex === 3 || colIndex === 5);
                 
                // B列(index=1): タイムスタンプをJST変換
+ 
+            /* ---    
                 if (colIndex === 1 && cell) {
-            
-                    const jst =
+                                const jst =
                         new Date(cell).toLocaleString(
                             'ja-JP',
                             {
@@ -379,7 +380,7 @@ async function loadClass() {
                         );
             
                     html += "<td>" + jst + "</td>";
-                
+               */   
                 // E列(index=4):参加区分 → タグ表示
                 if (colIndex === 4) {
                     html += "<td>" + participationTag(cell) + "</td>";
