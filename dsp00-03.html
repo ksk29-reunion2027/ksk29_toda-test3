@@ -203,7 +203,7 @@ select {
         </div>
         <div class="last-updated" id="classUpdated"></div>
 
-        <div class="note">※ 内容は自動更新されます（約2分ごと）</div>
+        <div class="note">※ 内容は自動更新されます（約10分ごと）</div>
     </div>
 
     <!-- 戻るボタン -->
@@ -221,8 +221,8 @@ select {
 // =============================================
 const GAS_URL = "https://script.google.com/macros/s/AKfycbz1NaMNVHPPgXHd5ciFxTkViFyiCuHCyfAJULyLFS02VrR18kijgUsWpievnD3cGDey/exec";
 
-// 自動リロード間隔（2分）
-const RELOAD_INTERVAL_MS = 2 * 60 * 1000;
+// 自動リロード間隔（10 分）
+const RELOAD_INTERVAL_MS = 10 * 60 * 1000;
 
 // =============================================
 // 現在時刻を「HH:MM:SS」形式で返す
@@ -413,7 +413,7 @@ loadClass();
 document.getElementById("classSelect").addEventListener("change", loadClass);
 
 // =============================================
-// 自動リロード（2分ごと）
+// 自動リロード（10分ごと）
 // =============================================
 setInterval(function() {
     loadSumd();
