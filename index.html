@@ -121,7 +121,7 @@
 
     <div class="login-box">
 
-        <h1> ｘｘｘ高校　 </h1>
+        <h1> ｘｘｘzz高校　 </h1>
         <h1>  （ｙｙ期同窓会）</h1>
         
         <p>パスワードを入力してください</p>
@@ -132,8 +132,34 @@
 
     </div>
 
+   
+   <div id="debug"></div>
+      #message {
+          margin-top: 15px;
+          color: red;
+          font-weight: bold;
+      }
+
+      #debug{
+          margin-top:20px;
+          color:blue;
+          font-size:14px;
+          white-space:pre-wrap;
+      }
+
+
+
+   
     <script>
-      // "xxx" の SHA-256 ハッシュ値
+
+       function dbg(text){
+          document.getElementById("debug").innerHTML +=
+          text + "<br>";
+      }
+       
+
+       
+       // "xxx" の SHA-256 ハッシュ値
       const PASSWORD_HASH = "8cf48579590198347877319666b32e77a4c862a89ad57bf8734f9d991f30897c";
       //
       // SHA-256 生成
@@ -156,8 +182,8 @@
         const message = document.getElementById("message"); 
         const hash = await sha256(pw);
 
-document.getElementById("debug").innerHTML =
-        "入力値pw = " + pw;
+ dbg("入力値pw=" + pw  + "/");
+ dbg("入力値hash=" + hash);         
           
          if(  pw == "" ) { 
                 message.innerHTML = "パスワードを入力してください!";
