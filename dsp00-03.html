@@ -168,7 +168,7 @@ select {
 
 <div class="container">
 
-    <h1>2026 現在の申込状況</h1>
+    <h1>2026a 現在の申込状況</h1>
 
     <!-- 全体集計 -->
     <div class="section">
@@ -379,7 +379,6 @@ async function loadClass() {
                     }
                 
                     html += "<td>" + jst + "</td>";
-                
                     return;
                 }                
                // E列(index=4):参加区分 → タグ表示
@@ -390,7 +389,8 @@ async function loadClass() {
                           + (cell != null && cell !== "" ? cell : "")
                           + "</td>";
                 }
-            });
+            }
+         );
             html += "</tr>";
         });
 
