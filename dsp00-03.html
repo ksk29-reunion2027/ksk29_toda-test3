@@ -361,6 +361,25 @@ async function loadClass() {
             row.forEach(function(cell, colIndex) {
                 // D列(index=3):名前、F列(index=5):近況 → 左寄せ
                 const isLeft = (colIndex === 3 || colIndex === 5);
+                
+               // B列(index=1): タイムスタンプをJST変換
+                if (colIndex === 1 && cell) {
+            
+                    const jst =
+                        new Date(cell).toLocaleString(
+                            'ja-JP',
+                            {
+                                timeZone: 'Asia/Tokyo',
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            }
+                        );
+            
+                    html += "<td>" + jst + "</td>";
+                
                 // E列(index=4):参加区分 → タグ表示
                 if (colIndex === 4) {
                     html += "<td>" + participationTag(cell) + "</td>";
