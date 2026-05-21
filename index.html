@@ -138,7 +138,7 @@
       //
       // SHA-256 生成
       //
-      async function sha256(text) {
+        function sha256(text) {
       
         const msgUint8 = new TextEncoder().encode(text);
         const hashBuffer =
@@ -156,6 +156,9 @@
         const message = document.getElementById("message"); 
         const hash = await sha256(pw);
 
+document.getElementById("debug").innerHTML =
+        "入力値pw = " + pw;
+          
          if(  pw == "" ) { 
                 message.innerHTML = "パスワードを入力してください!";
                 message.style.color = "red";
