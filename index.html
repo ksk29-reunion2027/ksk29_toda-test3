@@ -113,7 +113,7 @@
         #success {
             color: green;
             font-weight: bold;
-
+        }
       #message {
           margin-top: 15px;
           color: red;
@@ -135,9 +135,7 @@
 <body>
 
    <div id="debug"></div>
-   dbg("ログインボックス描画" );
-
-   
+      
    <div class="login-box">
 
         <h1> ｘｘｘーzz高校　 </h1>
@@ -171,7 +169,7 @@
       //
       // SHA-256 生成
       //
-        function sha256(text) {
+        async function sha256(text) {
       
         const msgUint8 = new TextEncoder().encode(text);
         const hashBuffer =
