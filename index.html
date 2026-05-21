@@ -150,8 +150,8 @@
       }
       //
       // パスワードチェック
-      //
-      async function checkPassword() {
+      // async
+       function checkPassword() {
         const pw = document.getElementById("password").value;
         const message = document.getElementById("message"); 
         const hash = await sha256(pw);
