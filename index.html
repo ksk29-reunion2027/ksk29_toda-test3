@@ -124,8 +124,8 @@
 
     <div class="login-box">
 
-        <h1> 岸和田高校　 </h1>
-        <h1>  （２９期同窓会）</h1>
+        <h1> ｘｘｘ高校　 </h1>
+        <h1>  （ｙｙ期同窓会）</h1>
         
         <p>パスワードを入力してください</p>
         <input type="password" id="password" placeholder="パスワード">
@@ -136,7 +136,44 @@
     </div>
 
     <script>
-        function checkPassword() {
+      // "xxx" の SHA-256 ハッシュ値
+      const PASSWORD_HASH = "8cf48579590198347877319666b32e77a4c862a89ad57bf8734f9d991f30897c";
+      //
+      // SHA-256 生成
+      //
+      async function sha256(text) {
+      
+        const msgUint8 = new TextEncoder().encode(text);
+        const hashBuffer =
+          await crypto.subtle.digest('SHA-256', msgUint8);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray
+          .map(b => b.toString(16).padStart(2, '0'))
+          .join('');
+      }
+      //
+      // パスワードチェック
+      //
+      async function checkPassword() {
+        const pw = document.getElementById("pw").value;
+        const hash = await sha256(pw);
+
+         if(  pw == "" ) { 
+                message.innerHTML = "パスワードを入力してください!";
+                message.style.color = "red";
+         else if(hash === PASSWORD_HASH){
+          // 認証OK時,次画面へ移動
+            sessionStorage.setItem("auth", "ok");
+            window.location.href = "home00.html";
+        } else {
+                message.innerHTML = "パスワードが違います!";
+                message.style.color = "red";
+        }
+      }
+
+       
+      /*  -----------20260521 コメントアウト 
+       function checkPassword() {
             const password = document.getElementById("password").value;
             const message = document.getElementById("message");
             if (password === "") {
@@ -153,6 +190,7 @@
                 message.style.color = "red";
             }
         }
+       ----------------- */ 
     </script>
 
 </body>
