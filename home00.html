@@ -10,6 +10,12 @@
     <script>
 
         // =========================
+        // 提供モード
+        // =========================
+        // const provide_MODE = 1;  // 第一段階
+        const provide_MODE = 2;　　  // 第二段階
+        
+        // =========================
         // デバッグフラグ
         // =========================
         const DEBUG_MODE = 0;
@@ -292,18 +298,33 @@
 
         </a>
 
-        <a
-            href="https://forms.gle/C7HhkWAHuc6sMY5VA"
-            class="menu-button"
-            target="_blank"
-            rel="noopener noreferrer">
+        if(provide_MODE ==1 ){
+                <a
+                    href="https://forms.gle/C7HhkWAHuc6sMY5VA"
+                    class="menu-button"
+                    target="_blank"
+                    rel="noopener noreferrer">
+        
+                    ２．同窓会への参加　仮申し込み<br>
+                    （ホテル人数キャパ確認用）<br>
+                    受付中～26年8月31日まで
+        
+                </a>
+        else if( provide_MODE ==2 ){
+                <a
+                    href="https://forms.gle/C7HhkWAHuc6sMY5VA"
+                    class="menu-button"
+                    target="_blank"
+                    rel="noopener noreferrer">
+        
+                    ２．同窓会への参加　最終申し込み<br>
+                    受付中～27年■月■日まで
+        
+                </a>
+        }
+        
 
-            ２．同窓会への参加　仮申し込み<br>
-            （ホテル人数キャパ確認用）<br>
-            受付中～26年8月31日まで
-
-        </a>
-
+        
         <a href="dsp00-03.html" class="menu-button">
 
             ３．現在の申込状況の確認
