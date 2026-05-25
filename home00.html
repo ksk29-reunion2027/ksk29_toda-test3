@@ -1,33 +1,44 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>岸和田高校29期 同窓会</title>
-  
+
     <script>
 
         // =========================
         // 提供モード
         // =========================
-        // const provide_MODE = 1;  // 第一段階
-        const provide_MODE = 2;　　  // 第二段階
-        
+        // 1 = 仮申込
+        // 2 = 最終申込
+        // =========================
+
+        // const provide_MODE = 1;
+        const provide_MODE = 1;
+
         // =========================
         // デバッグフラグ
         // =========================
         const DEBUG_MODE = 0;
 
-        if(DEBUG_MODE !== 1) {
+        // =========================
+        // 認証チェック
+        // =========================
+        if (DEBUG_MODE !== 1) {
 
             if (sessionStorage.getItem("auth") !== "ok") {
+
                 window.location.href = "index.html";
             }
         }
 
+        // =========================
         // ログアウト
+        // =========================
         function logout() {
 
             sessionStorage.removeItem("auth");
@@ -43,29 +54,112 @@
 
             try {
 
-                // キャッシュ回避用 ?t=
                 const response = await fetch(
                     "udata/newdata.txt?t=" + new Date().getTime()
                 );
 
                 if (!response.ok) {
+
                     throw new Error("読込失敗");
                 }
 
                 const text = await response.text();
 
-                // 改行を <br> に変換
-                area.innerHTML = text.replace(/\n/g, "<br>");
+                area.innerHTML =
+                    text.replace(/\n/g, "<br>");
 
-            } catch(error) {
+            } catch (error) {
 
                 area.innerHTML =
                     "現在、新着情報を取得できません。";
             }
         }
 
-        // ページ読込後に実行
-        window.addEventListener("DOMContentLoaded", loadNews);
+        // =========================
+        // 参加申込ボタン生成
+        // =========================
+        function createEntryButton() {
+
+            const menu = document.getElementById("menuArea");
+
+            const a = document.createElement("a");
+
+            a.className = "menu-button";
+
+            a.target = "_blank";
+
+            a.rel = "noopener noreferrer";
+
+            if (provide_MODE == 1) {
+
+                a.href =
+                    "https://forms.gle/C7HhkWAHuc6sMY5VA";
+
+                a.appendChild(
+                    document.createTextNode(
+                        "２．同窓会への参加　仮申し込み"
+                    )
+                );
+
+                a.appendChild(
+                    document.createElement("br")
+                );
+
+                a.appendChild(
+                    document.createTextNode(
+                        "（ホテル人数キャパ確認用）"
+                    )
+                );
+
+                a.appendChild(
+                    document.createElement("br")
+                );
+
+                a.appendChild(
+                    document.createTextNode(
+                        "受付中～26年8月31日まで"
+                    )
+                );
+
+            } else if (provide_MODE == 2) {
+
+                a.href =
+                    "https://forms.gle/XXXXXXXXXXXX";
+
+                a.appendChild(
+                    document.createTextNode(
+                        "２．同窓会への参加　最終申し込み"
+                    )
+                );
+
+                a.appendChild(
+                    document.createElement("br")
+                );
+
+                a.appendChild(
+                    document.createTextNode(
+                        "受付中～27年■月■日まで"
+                    )
+                );
+            }
+
+            menu.appendChild(a);
+        }
+
+        // =========================
+        // 初期処理
+        // =========================
+        window.addEventListener(
+
+            "DOMContentLoaded",
+
+            () => {
+
+                loadNews();
+
+                createEntryButton();
+            }
+        );
 
     </script>
 
@@ -75,48 +169,72 @@
 
             margin: 0;
             padding: 0;
+
             font-family: sans-serif;
+
             background-color: #f4f4f4;
             color: #333;
 
-            background-image: url('image/back04.png');
+            background-image:
+                url('image/back04.png');
+
             background-repeat: no-repeat;
+
             background-position: center center;
+
             background-size: cover;
+
             background-attachment: fixed;
         }
 
         .container {
 
             max-width: 480px;
+
             margin: auto;
+
             padding: 20px;
         }
 
         h1 {
 
             text-align: center;
+
             font-size: 24px;
+
             margin-bottom: 20px;
+
             color: #ffffff;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+
+            text-shadow:
+                1px 1px 4px rgba(0,0,0,0.5);
         }
 
         .greeting {
 
             position: relative;
-            background-color: rgba(255,255,255,0.88);
+
+            background-color:
+                rgba(255,255,255,0.88);
+
             padding: 20px;
+
             border-radius: 12px;
+
             margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.1);
+
             line-height: 1.8;
+
             overflow: hidden;
         }
 
         .greeting::before {
 
             content: "";
+
             position: absolute;
 
             top: 50%;
@@ -125,42 +243,52 @@
             width: 220px;
             height: 220px;
 
-            transform: translate(-50%, -50%);
+            transform:
+                translate(-50%, -50%);
 
-            background-image: url('image/ksk.png');
+            background-image:
+                url('image/ksk.png');
+
             background-repeat: no-repeat;
+
             background-position: center;
+
             background-size: 180px;
 
             opacity: 0.35;
+
             z-index: 0;
         }
 
         .greeting * {
 
             position: relative;
+
             z-index: 1;
         }
 
-        /* ========================= */
-        /* 新着情報ボックス */
-        /* ========================= */
         .news-box {
 
-            background-color: rgba(255,255,255,0.92);
-            border-left: 6px solid #e53935;
+            background-color:
+                rgba(255,255,255,0.92);
+
+            border-left:
+                6px solid #e53935;
 
             padding: 16px;
+
             margin-bottom: 25px;
 
             border-radius: 12px;
 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.1);
         }
 
         .news-title {
 
             font-size: 18px;
+
             font-weight: bold;
 
             margin-bottom: 10px;
@@ -171,6 +299,7 @@
         .news-content {
 
             font-size: 15px;
+
             line-height: 1.7;
 
             white-space: normal;
@@ -179,28 +308,38 @@
         .menu-button {
 
             display: block;
+
             width: 100%;
+
             box-sizing: border-box;
 
             text-decoration: none;
 
             background-color: #2d6cdf;
+
             color: white;
 
             padding: 18px;
+
             margin-bottom: 18px;
 
             border-radius: 12px;
 
             font-size: 18px;
+
             text-align: center;
+
             font-weight: bold;
 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            box-shadow:
+                0 2px 5px rgba(0,0,0,0.15);
 
             white-space: normal;
+
             line-height: 1.6;
+
             height: auto;
+
             overflow: visible;
         }
 
@@ -212,19 +351,25 @@
         .logout-button {
 
             display: block;
+
             width: 100%;
+
             box-sizing: border-box;
 
             background-color: #888;
+
             color: white;
 
             padding: 14px;
+
             margin-top: 30px;
 
             border: none;
+
             border-radius: 12px;
 
             font-size: 16px;
+
             font-weight: bold;
 
             cursor: pointer;
@@ -238,53 +383,77 @@
         .footer {
 
             margin-top: 30px;
+
             text-align: center;
 
             font-size: 14px;
 
             color: #ffffff;
 
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            text-shadow:
+                1px 1px 3px rgba(0,0,0,0.6);
         }
 
     </style>
 
 </head>
-  
+
 <body>
 
     <div class="container">
 
-        <h1>岸和田高校29期 同窓会</h1>
+        <h1>
+
+            岸和田高校29期 同窓会
+
+        </h1>
 
         <div class="greeting">
 
-            <p>皆さま、お元気でしょうか。</p>
+            <p>
+
+                皆さま、お元気でしょうか。
+
+            </p>
 
             <p>
+
                 2027年開催予定の同窓会に向け、
                 情報共有用ホームページを開設いたしました。
+
             </p>
 
             <p>
-                開催概要、参加申込、現在の申込状況などを
+
+                開催概要、参加申込、
+                現在の申込状況などを
                 随時掲載してまいります。
+
             </p>
 
-            <p>是非ご活用ください。</p>
+            <p>
+
+                是非ご活用ください。
+
+            </p>
 
         </div>
 
         <!-- ========================= -->
         <!-- 新着情報 -->
         <!-- ========================= -->
+
         <div class="news-box">
 
             <div class="news-title">
+
                 ■ 新着情報
+
             </div>
 
-            <div id="newsArea" class="news-content">
+            <div
+                id="newsArea"
+                class="news-content">
 
                 読み込み中...
 
@@ -292,82 +461,47 @@
 
         </div>
 
-        <a href="dsp00-01.html" class="menu-button">
+        <!-- ========================= -->
+        <!-- メニュー -->
+        <!-- ========================= -->
+
+        <a
+            href="dsp00-01.html"
+            class="menu-button">
 
             １．2027年同窓会の概要
 
         </a>
-       <!-- ========================= -->
-        <!-- ２の選択肢　変更           ->
-        <!-- =========================-->
-         const menu = document.getElementById("menuArea");
-        
-        const a = document.createElement("a");
-        
-        a.className = "menu-button";
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        
-        if (provide_MODE == 1) {
-        
-            a.href = "https://forms.gle/C7HhkWAHuc6sMY5VA";
-        
-            a.appendChild(
-                document.createTextNode(
-                    "２．同窓会への参加　仮申し込み"
-                )
-            );
-        
-            a.appendChild(document.createElement("br"));
-        
-            a.appendChild(
-                document.createTextNode(
-                    "（ホテル人数キャパ確認用）"
-                )
-            );
-        
-            a.appendChild(document.createElement("br"));
-        
-            a.appendChild(
-                document.createTextNode(
-                    "受付中～26年8月31日まで"
-                )
-            );
-        
-        } else if (provide_MODE == 2) {
-        
-            a.href = "https://forms.gle/XXXXXXXXXXXX";
-        
-            a.appendChild(
-                document.createTextNode(
-                    "２．同窓会への参加　最終申し込み"
-                )
-            );
-        
-            a.appendChild(document.createElement("br"));
-        
-            a.appendChild(
-                document.createTextNode(
-                    "受付中～27年■月■日まで"
-                )
-            );
-        
-        }
-        menu.appendChild(a);  
-        
 
-        
-        <a href="dsp00-03.html" class="menu-button">
+        <!-- ========================= -->
+        <!-- 参加申込ボタン -->
+        <!-- ========================= -->
+
+        <div id="menuArea"></div>
+
+        <a
+            href="dsp00-03.html"
+            class="menu-button">
 
             ３．現在の申込状況の確認
 
         </a>
 
-        <button class="logout-button" onclick="logout()">
+        <!-- ========================= -->
+        <!-- ログアウト -->
+        <!-- ========================= -->
+
+        <button
+            class="logout-button"
+            onclick="logout()">
 
             ログアウト
 
         </button>
+
+        <!-- ========================= -->
+        <!-- フッター -->
+        <!-- ========================= -->
 
         <div class="footer">
 
@@ -378,4 +512,5 @@
     </div>
 
 </body>
+
 </html>
