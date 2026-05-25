@@ -297,31 +297,63 @@
             １．2027年同窓会の概要
 
         </a>
-
-        if(provide_MODE ==1 ){
-                <a
-                    href="https://forms.gle/C7HhkWAHuc6sMY5VA"
-                    class="menu-button"
-                    target="_blank"
-                    rel="noopener noreferrer">
+       <!-- ========================= -->
+        <!-- ２の選択肢　変更           ->
+        <!-- =========================-->
+         const menu = document.getElementById("menuArea");
         
-                    ２．同窓会への参加　仮申し込み<br>
-                    （ホテル人数キャパ確認用）<br>
-                    受付中～26年8月31日まで
+        const a = document.createElement("a");
         
-                </a>
-        else if( provide_MODE ==2 ){
-                <a
-                    href="https://forms.gle/C7HhkWAHuc6sMY5VA"
-                    class="menu-button"
-                    target="_blank"
-                    rel="noopener noreferrer">
+        a.className = "menu-button";
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
         
-                    ２．同窓会への参加　最終申し込み<br>
-                    受付中～27年■月■日まで
+        if (provide_MODE == 1) {
         
-                </a>
+            a.href = "https://forms.gle/C7HhkWAHuc6sMY5VA";
+        
+            a.appendChild(
+                document.createTextNode(
+                    "２．同窓会への参加　仮申し込み"
+                )
+            );
+        
+            a.appendChild(document.createElement("br"));
+        
+            a.appendChild(
+                document.createTextNode(
+                    "（ホテル人数キャパ確認用）"
+                )
+            );
+        
+            a.appendChild(document.createElement("br"));
+        
+            a.appendChild(
+                document.createTextNode(
+                    "受付中～26年8月31日まで"
+                )
+            );
+        
+        } else if (provide_MODE == 2) {
+        
+            a.href = "https://forms.gle/XXXXXXXXXXXX";
+        
+            a.appendChild(
+                document.createTextNode(
+                    "２．同窓会への参加　最終申し込み"
+                )
+            );
+        
+            a.appendChild(document.createElement("br"));
+        
+            a.appendChild(
+                document.createTextNode(
+                    "受付中～27年■月■日まで"
+                )
+            );
+        
         }
+        menu.appendChild(a);  
         
 
         
