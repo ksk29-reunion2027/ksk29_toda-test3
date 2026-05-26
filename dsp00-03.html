@@ -219,9 +219,22 @@ select {
 // ★ GAS WebアプリのURLをここに設定してください
 // デプロイ後に発行されるURLを貼り付けてください
 // =============================================
-const GAS_URL = "https://script.google.com/macros/s/AKfycbz1NaMNVHPPgXHd5ciFxTkViFyiCuHCyfAJULyLFS02VrR18kijgUsWpievnD3cGDey/exec";
+// =========================
+// 20260526　機能追加
+// 提供モード
+// 1 : 第一段階提供
+// 2 : 第二段階提供
+// =========================
+ const PROV_MODE = 2;
+ let GAS_URL = "";   
+if (PROV_MODE ==1 ) { 
+    GAS_URL = "https://script.google.com/macros/s/AKfycbz1NaMNVHPPgXHd5ciFxTkViFyiCuHCyfAJULyLFS02VrR18kijgUsWpievnD3cGDey/exec";
+}
+else if( PROV_MODE=2 ){
+     GAS_URL = "https://script.google.com/macros/s/AKfycbzvMfZthorQL2nTg-c4M7nFb6lRjg3oLFL8QO3UrAgcFoDJ4ae0JtZeKzFyJ9rysYba/exec";
+}
 
-// 自動リロード間隔（10 分）
+    // 自動リロード間隔（10 分）
 const RELOAD_INTERVAL_MS = 10 * 60 * 1000;
 
 // =============================================
